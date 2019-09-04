@@ -7,6 +7,10 @@ export default createStackNavigator(
       screen: Test,
       title: "Test Ekranı",
     },
+    Test1: {
+      screen: Test,
+      title: "Test Ekranı",
+    },
   },
   {
     headerMode: "none",

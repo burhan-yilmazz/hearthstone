@@ -8,10 +8,12 @@ import "Core/Reactotron";
 const App = () => {
   return (
     <Provider store={store}>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={{ flex: 1 }}>
-        <RootNavigator />
-      </SafeAreaView>
+      <StatusBar
+        barStyle="light-content"
+        translucent
+        backgroundColor="transparent"
+      />
+      <RootNavigator />
     </Provider>
   );
 };

@@ -1,1 +1,1 @@
-export { default as ProjectCardBottomImage } from './project-card-bottom.png';
+export { default as HeaderBgImage } from "./files/headerBg.jpg";

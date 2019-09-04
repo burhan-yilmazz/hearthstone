@@ -1,22 +1,46 @@
 import React from "react";
-import {} from "react-native";
-import { wp } from "Core/Utils";
-import styled from "styled-components";
-import { Colors } from "Core/Theme";
+import { View } from "react-native";
+import { hp } from "Core/Utils";
+import base64 from "Assets/images/base64";
+import { Space, CustomHeader, FlipCard, MechanicsItem } from "Components";
+import { ScrollView } from "react-native-gesture-handler";
 
-const InfoText = styled.Text`
-  font-weight: 600;
-  text-align: center;
-  padding: ${wp(4)}px;
-  font-size: ${wp(5)}px;
-  color: ${Colors.white};
-  background-color: ${Colors.green};
-`;
+const mechanics = ["Spell Damage", "AIMustPlay", "AffectedBySpellPower"];
 
-export default ({}) => {
+const hearthstoneCards = [
+  "http://wow.zamimg.com/images/hearthstone/cards/enus/original/BRMA11_1.png",
+  "http://wow.zamimg.com/images/hearthstone/cards/enus/original/BRMA12_2.png",
+  "http://wow.zamimg.com/images/hearthstone/cards/enus/original/BRMA16_2H.png",
+  "http://wow.zamimg.com/images/hearthstone/cards/enus/original/BRMA13_8.png",
+];
+
+export default ({ navigation }) => {
   return (
-    <>
-      <InfoText>Bu ekran component test ekranıdır.</InfoText>
-    </>
+    <View style={{ flex: 1 }}>
+      <CustomHeader
+        title="Mechanics"
+        backIcon={base64.ArrowBackIcon}
+        searchIcon={base64.SearchIcon}
+        navigation={navigation}
+      />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <Space valeu={hp(4)} />
+        <View
+          style={{
+            alignSelf: "center",
+          }}>
+          {hearthstoneCards.map(card => {
+            return <FlipCard cardImage={card} key={card} />;
+          })}
+        </View>
+
+        <Space valeu={hp(4)} />
+        <View>
+          {mechanics.map(mechanic => (
+            <MechanicsItem mechanic={mechanic} key={mechanic} />
+          ))}
+        </View>
+      </ScrollView>
+    </View>
   );
 };

@@ -8,7 +8,7 @@ export default {
   purple: "#4d4cd0",
   pink: "#ff274b",
   white: "#ffffff",
-  customGray: "#edecf2",
+  customGray: "#FAFAFA",
   lightGray: "#e1e1e7",
   lightGray2: "#cbcbd0",
   midGray: "#c0c0c5",
