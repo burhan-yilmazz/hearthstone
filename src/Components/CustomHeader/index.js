@@ -4,6 +4,8 @@ import { Colors } from "Core/Theme";
 import { Space } from "Components";
 import { wp, isAndroid, hp } from "Core/Utils";
 import { HeaderBgImage } from "Assets/images";
+import SearchCardInput from "Containers/SearchCardInput";
+import { ScreenNames } from "Navigators/Constants";
 
 const HeaderContainer = styled.ImageBackground`
   background-color: ${Colors.white};
@@ -26,7 +28,7 @@ const Icon_ = styled.Image`
 
 const Title_ = styled.Text`
   color: ${Colors.white};
-  font-size: ${wp(5.5)}px;
+  font-size: ${wp(6.5)}px;
   font-weight: 600;
 `;
 
@@ -46,11 +48,12 @@ export default ({
         <Title_>{title}</Title_>
         <TouchableArea
           onPress={() => {
-            navigate("Test1");
+            navigate(ScreenNames.CARDSEARCH);
           }}>
           {searchIcon && <Icon_ source={{ uri: searchIcon }} />}
         </TouchableArea>
       </Overlay>
+      {!searchIcon && <SearchCardInput />}
     </HeaderContainer>
   );
 };

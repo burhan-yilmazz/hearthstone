@@ -1,22 +1,25 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { Animated, StyleSheet } from "react-native";
-import { hp } from "Core/Utils";
+import { hp, wp } from "Core/Utils";
 import styled from "styled-components";
 import { Colors } from "Core/Theme";
+import { CardInfo } from "Components";
 
-const height = hp(465 / 9);
-const width = hp(307 / 9);
+const height = hp(465 / 8);
+const width = hp(307 / 8);
 const Container = styled.TouchableOpacity`
   height: ${height}px;
   width: ${width}px;
   margin: 5px 0px 5px 0px;
 `;
 
-const Data = styled.View`
+const ImageErroPlaceholder = styled.View`
   height: ${height}px;
   width: ${width}px;
-  background-color: ${Colors.lightGray};
+  background-color: ${({ color }) => "#484440"};
   border-radius: 15px;
+  padding: ${wp(2)}px;
+  justify-content: space-between;
 `;
 
 const CardContainer = styled.View`
@@ -24,6 +27,7 @@ const CardContainer = styled.View`
 `;
 
 const AnimatedCardContainer = Animated.createAnimatedComponent(CardContainer);
+const AnimatedContainer = Animated.createAnimatedComponent(Container);
 
 const CardImage = styled.Image`
   height: ${height}px;
@@ -34,33 +38,30 @@ const defaultAnimationConfig = {
   friction: 8,
   tension: 10,
   useNativeDriver: true,
+  isInteraction: false,
 };
 
-const hearthstoneCards = [
-  "http://wow.zamimg.com/images/hearthstone/cards/enus/original/BRMA11_1.png",
-  "http://wow.zamimg.com/images/hearthstone/cards/enus/original/BRMA29_1.png",
-  "http://wow.zamimg.com/images/hearthstone/cards/enus/original/BRMA16_2H.png",
-  "http://wow.zamimg.com/images/hearthstone/cards/enus/original/BRMA13_8.png",
-];
-
-export default ({ cardImage }) => {
-  const animatedValue = new Animated.Value(0);
-  const val = {};
-  val[cardImage] = 0;
+export default ({ item }) => {
+  const [animatedValue] = useState(new Animated.Value(0));
+  const [error, setError] = useState(false);
+  const { cardId, img } = item;
+  const values = {};
+  values[cardId] = 0;
 
   useEffect(() => {
     const listenerId = animatedValue.addListener(({ value }) => {
-      val[cardImage] = value;
+      values[cardId] = value;
     });
+
     return () => animatedValue.removeListener(listenerId);
   }, []);
 
   flipCb = useCallback(() => {
-    if (val[cardImage] >= 90) {
+    if (values[cardId] >= 90) {
       Animated.spring(animatedValue, {
         toValue: 0,
         ...defaultAnimationConfig,
-      }).start(() => {});
+      }).start();
     } else {
       Animated.spring(animatedValue, {
         toValue: 180,
@@ -72,6 +73,13 @@ export default ({ cardImage }) => {
   const frontInterpolate = animatedValue.interpolate({
     inputRange: [0, 180],
     outputRange: ["0deg", "180deg"],
+    extrapolate: "clamp",
+  });
+
+  const backInterpolate = animatedValue.interpolate({
+    inputRange: [0, 180],
+    outputRange: ["180deg", "360deg"],
+    extrapolate: "clamp",
   });
 
   const frontAnimationStyle = {
@@ -82,11 +90,6 @@ export default ({ cardImage }) => {
     ],
   };
 
-  const backInterpolate = animatedValue.interpolate({
-    inputRange: [0, 180],
-    outputRange: ["180deg", "360deg"],
-  });
-
   const backAnimationStyle = {
     transform: [
       {
@@ -95,19 +98,29 @@ export default ({ cardImage }) => {
     ],
   };
 
+  if (!img || error) {
+    return null;
+  }
+
   return (
-    <Container onPress={flipCb} activeOpacity={1}>
+    <AnimatedContainer onPress={flipCb} activeOpacity={1}>
       <AnimatedCardContainer style={[frontAnimationStyle]}>
-        <CardImage source={{ uri: cardImage }} resizeMode="cover" />
+        {!error ? (
+          <CardImage
+            source={{
+              uri: `https://www.hearthstonedb.net/images/enus/${cardId}.png`,
+            }}
+            resizeMode="cover"
+            onError={setError}
+          />
+        ) : (
+          <ImageErroPlaceholder color={Colors.lightGray2} />
+        )}
       </AnimatedCardContainer>
       <AnimatedCardContainer
         style={[backAnimationStyle, { ...StyleSheet.absoluteFillObject }]}>
-        {false ? (
-          <Data />
-        ) : (
-          <CardImage source={{ uri: hearthstoneCards[0] }} resizeMode="cover" />
-        )}
+        <CardInfo card={item} />
       </AnimatedCardContainer>
-    </Container>
+    </AnimatedContainer>
   );
 };

@@ -25,8 +25,8 @@ const Title = styled.Text`
   font-size: ${wp(5)};
 `;
 
-export default ({ mechanic }) => (
-  <MechanicCard key={mechanic}>
+export default ({ mechanic, onPress }) => (
+  <MechanicCard key={mechanic} activeOpacity={0.5} onPress={onPress}>
     <Title>{mechanic}</Title>
     <Icon source={{ uri: base64.ArrowIcon }} />
   </MechanicCard>

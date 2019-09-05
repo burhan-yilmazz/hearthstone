@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
-import TestReducer from "./TestReducer";
 import Constants from "Redux/Constants";
+import CardReducer from "./CardReducer";
 
 export default combineReducers({
-  [Constants.STATE_TEST]: TestReducer,
+  [Constants.STATE_CARD]: CardReducer,
 });

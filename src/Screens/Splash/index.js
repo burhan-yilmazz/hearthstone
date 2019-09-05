@@ -1,16 +1,21 @@
 import React, { useEffect } from "react";
-import { View, Text } from "react-native";
+import { connect } from "react-redux";
+import { getAllCards } from "Redux/Actions/CardActions";
+import { Loading } from "Components";
+import { ScreenNames } from "Navigators/Constants";
 
-const Splash = ({ navigation: { navigate } }) => {
+const Splash = ({ navigation: { navigate }, getAllCards }) => {
   useEffect(() => {
-    navigate("App");
+    getAllCards();
+    navigate(ScreenNames.MECHANICLIST);
   }, []);
 
-  return (
-    <View>
-      <Text>Splash</Text>
-    </View>
-  );
+  return <Loading />;
 };
 
-export default Splash;
+export default connect(
+  null,
+  {
+    getAllCards,
+  },
+)(Splash);

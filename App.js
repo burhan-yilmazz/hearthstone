@@ -1,9 +1,12 @@
 import React from "react";
-import { SafeAreaView, StatusBar } from "react-native";
+import { StatusBar } from "react-native";
 import { Provider } from "react-redux";
+import { useScreens } from "react-native-screens";
 import RootNavigator from "Navigators/RootNavigator";
 import store from "Redux/store";
 import "Core/Reactotron";
+
+useScreens();
 
 const App = () => {
   return (
