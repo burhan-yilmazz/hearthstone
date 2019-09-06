@@ -9,7 +9,7 @@ import 'jest-styled-components/native'
 import { FlipCard, CardInfo, MechanicsItem, CustomHeader } from 'Components';
 import base64 from 'Assets/images/base64';
 
-it('Flip Card Components', () => {
+it('Flip Card Component', () => {
   const wrapper = render(<FlipCard item={cards[0]} />);
   const uri = `https://www.hearthstonedb.net/images/enus/${cards[0].cardId}.png`;
 
@@ -19,7 +19,7 @@ it('Flip Card Components', () => {
 
 });
 
-it('Card Info Components', () => {
+it('Card Info Component', () => {
   const wrapper = render(<CardInfo card={cards[0]} />);
 
   expect(wrapper.queryAllByText("Psychopomp")).toHaveLength(1);
@@ -32,7 +32,7 @@ it('Card Info Components', () => {
 
 });
 
-it('Mechanics Item Components', () => {
+it('Mechanics Item Component', () => {
   const wrapper = render(<MechanicsItem mechanic={mechanics[0]} />);
 
   expect(wrapper.queryAllByText(mechanics[0])).toHaveLength(1);
@@ -42,7 +42,7 @@ it('Mechanics Item Components', () => {
 });
 
 
-it('Custom Header Components', () => {
+it('Custom Header Component', () => {
   const title = "Mechanics Title"
   const wrapper = render(<CustomHeader title={title} searchIcon={base64.SearchIcon} navigation={{ navigate: jest.fn(), goBack: jest.fn()}} />);
   
