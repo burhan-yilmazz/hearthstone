@@ -43,17 +43,17 @@ export default ({
       {isAndroid && <Space value={hp(0.25)} />}
       <Overlay>
         <TouchableArea onPress={() => goBack()}>
-          {backIcon && <Icon_ source={{ uri: backIcon }} size={wp(8)} />}
+          {backIcon && <Icon_  testID="headerBackIcon" source={{ uri: backIcon }} size={wp(8)} />}
         </TouchableArea>
-        <Title_>{title}</Title_>
+        <Title_ testID="headerTitle">{title}</Title_>
         <TouchableArea
           onPress={() => {
             navigate(ScreenNames.CARDSEARCH);
           }}>
-          {searchIcon && <Icon_ source={{ uri: searchIcon }} />}
+          {searchIcon && <Icon_ testID="headerSearchIcon" source={{ uri: searchIcon }} />}
         </TouchableArea>
       </Overlay>
-      {!searchIcon && <SearchCardInput />}
+      {!searchIcon && <SearchCardInput testID="headerSearchInput"/>}
     </HeaderContainer>
   );
 };

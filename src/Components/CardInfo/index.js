@@ -46,11 +46,11 @@ const properties = [
   { id: "cardSet", title: "Card Set" },
 ];
 
-export default ({ card }) => {
+export default ({ card, testID }) => {
   const { name, type } = card;
 
   return (
-    <Container color={Colors.lightGray}>
+    <Container color={Colors.lightGray} testID={testID}>
       <CardName>{name}</CardName>
       <CardContainer>
         {properties.map(property => {

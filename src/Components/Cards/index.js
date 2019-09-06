@@ -18,7 +18,7 @@ export default ({ data }) => {
       keyExtractor={item => item.cardId}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ alignSelf: "center" }}
-      renderItem={({ item }) => <FlipCard item={item} />}
+      renderItem={({ item }) => <FlipCard item={item} testID="flipCard" />}
     />
   );
 };

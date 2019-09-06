@@ -107,6 +107,7 @@ export default ({ item }) => {
       <AnimatedCardContainer style={[frontAnimationStyle]}>
         {!error ? (
           <CardImage
+            testID="cardImage"
             source={{
               uri: `https://www.hearthstonedb.net/images/enus/${cardId}.png`,
             }}
@@ -119,7 +120,7 @@ export default ({ item }) => {
       </AnimatedCardContainer>
       <AnimatedCardContainer
         style={[backAnimationStyle, { ...StyleSheet.absoluteFillObject }]}>
-        <CardInfo card={item} />
+        <CardInfo card={item} testID="cardInfo"/>
       </AnimatedCardContainer>
     </AnimatedContainer>
   );

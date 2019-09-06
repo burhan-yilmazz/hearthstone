@@ -28,6 +28,6 @@ const Title = styled.Text`
 export default ({ mechanic, onPress }) => (
   <MechanicCard key={mechanic} activeOpacity={0.5} onPress={onPress}>
     <Title>{mechanic}</Title>
-    <Icon source={{ uri: base64.ArrowIcon }} />
+    <Icon testID="mechanicItemsIcon" source={{ uri: base64.ArrowIcon }} />
   </MechanicCard>
 );
